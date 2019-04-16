@@ -16,3 +16,6 @@ docs/_site
 docs/Gemfile.lock
 docs/figs/*.aux
 docs/figs/*.log
+presentations/*/figs/*.aux
+presentations/*/figs/*.log
+presentations/*/figs/*.h5

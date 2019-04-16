@@ -172,7 +172,7 @@ font={\bfseries},
   \draw[arrowto] (provenance.south) |- (prov2.west);
 
   % Legend
-  \matrix [draw,below left, row sep=0.5em] at (current bounding box.north east) {
+  \matrix [draw=white,below left, row sep=0.5em] at ($(workspace.north east)+(36em,0)$) {
     \node [group, legend] {Group}; \\[4pt]
     \node [dataset, legend] {Dataset as int/float array}; \\
     \node [dataset, xml, legend] {Dataset as XML}; \\

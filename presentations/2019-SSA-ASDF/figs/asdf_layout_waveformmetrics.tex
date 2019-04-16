@@ -1,0 +1,55 @@
+\documentclass[tikz, border=2pt]{standalone}
+\usepackage[none]{hyphenat}
+\usepackage{helvet}
+\renewcommand{\familydefault}{phv}
+
+\begin{document}
+\pagestyle{empty}
+
+\input{palettes/palette_general}
+\input{palettes/palette_usgs}
+
+\input{asdf_layout_base}
+
+\begin{tikzpicture}[diagram]
+
+  \node (workspace) [root] {Root (Workspace)};
+
+  % Events
+  \node (events) [below=of workspace.center, dataset, xml, subset-right] {QuakeML};
+  \draw[arrowto] (workspace.south) |- (events.west);
+
+  % Auxiliary data
+  \node (auxdata) [below=of workspace.center, group, subset-right] {AuxiliaryData};
+  \draw[arrowto] (workspace.south) |- (auxdata.west);
+
+  % Waveform metrics (directly associated with waveforms, so use same dataset naming scheme)
+  \node (wf-metrics) [below=of auxdata.center, group, subset-right] {WaveformMetrics};
+  \draw[arrowto] (auxdata.south) |- (wf-metrics.west);
+
+  \node (wm-st0) [below=of wf-metrics.center, group, subset-right] {\variable{NET.STA}};
+  \node (wm-st0-wf0) [below=of wm-st0.center, dataset, xml, subset-right] {\variable{NET.STA.LOC.CHA\duscore{}START\duscore{}END\duscore{}WTAG\duscore{}TAG}};
+  \node (wm-st0-wf1) [below=of wm-st0-wf0.west, dataset, xml] {\variable{NET.STA.LOC.CHA\duscore{}START\duscore{}END\duscore{}WTAG\duscore{}TAG}};
+  \node (wm-st1) [below=of wm-st0.west, group, yshift=-5.0em] {\variable{NET.STA}};
+  \node (wm-st1-wf0) [below=of wm-st1.center, dataset, xml, subset-right] {\variable{NET.STA.LOC.CHA\duscore{}START\duscore{}END\duscore{}WTAG\duscore{}TAG}};
+  \draw[arrowto] (wf-metrics.south) |- (wm-st0.west);
+  \draw[arrowto] (wm-st0.south) |- (wm-st0-wf0.west);
+  \draw[arrowto] (wm-st0.south) |- (wm-st0-wf1.west);
+  \draw[arrowto] (wf-metrics.south) |- (wm-st1.west);
+  \draw[arrowto] (wm-st1.south) |- (wm-st1-wf0.west);
+  
+  % Legend
+  \matrix [draw=white,below left, row sep=0.5em] at ($(workspace.north east)+(36em,0)$) {
+    \node [group, legend] {Group}; \\[4pt]
+    \node [dataset, legend] {Dataset as int/float array}; \\
+    \node [dataset, xml, legend] {Dataset as XML}; \\
+  };
+
+\node [rectangle, draw=white, yshift=-1.0em, anchor=north] at (current bounding box.south) {\includegraphics[scale=0.5]{asdf_waveformmetricsxml}};
+  
+
+  
+\end{tikzpicture}
+
+\end{document}
+

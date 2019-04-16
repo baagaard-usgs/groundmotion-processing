@@ -35,6 +35,29 @@ class H5App(object):
         with h5py.File("asdf_test.h5", "r") as h5:
             self.xml_to_png(h5["QuakeML"][:], "asdf_quakeml.png")
             self.xml_to_png(h5["Provenance"]["hses_foo_nz_hses_hn1"][:], "asdf_provxml.png")
+
+        return
+
+
+class XMLApp(object):
+
+    @staticmethod
+    def xml_to_png(xml, png_filename):
+
+        formatter = pygments.formatters.ImageFormatter(
+            style="native", image_format="png", font_size=18, line_numbers=False)
+        lexer = pygments.lexers.XmlLexer()
+
+        pygments.highlight(xml, lexer, formatter, outfile=png_filename)
+        return
+
+    def run(self):
+        with open("waveform_metrics.xml", "r") as fin:
+            self.xml_to_png(fin.read(), "asdf_waveformmetricsxml.png")
+
+        with open("station_metrics.xml", "r") as fin:
+            self.xml_to_png(fin.read(), "asdf_stationmetricsxml.png")
+
         return
 
 
@@ -56,3 +79,4 @@ class PythonApp(object):
 if __name__ == "__main__":
     H5App().run()
     PythonApp().run()
+    XMLApp().run()

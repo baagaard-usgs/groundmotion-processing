@@ -1,0 +1,52 @@
+\documentclass[tikz, border=2pt]{standalone}
+\usepackage[none]{hyphenat}
+\usepackage{helvet}
+\renewcommand{\familydefault}{phv}
+
+\begin{document}
+\pagestyle{empty}
+
+\input{palettes/palette_general}
+\input{palettes/palette_usgs}
+
+\input{asdf_layout_base}
+
+\begin{tikzpicture}[diagram]
+
+  \node (workspace) [root] {Root (Workspace)};
+
+  % Auxiliary data
+  \node (auxdata) [below=of workspace.center, group, subset-right] {AuxiliaryData};
+  \draw[arrowto] (workspace.south) |- (auxdata.west);
+
+  % Station metrics
+  \node (st-metrics) [below=of auxdata.center, group, subset-right] {StationMetrics};
+  \node (sm-st0) [below=of st-metrics.center, group, subset-right] {\variable{NET.STA}};
+  \node (sm-st0-eq0) [below=of sm-st0.center, dataset, xml, subset-right] {\variable{NET.STA\duscore{}EVENTID\duscore{}TAG}};
+  \node (sm-st0-eq1) [below=of sm-st0-eq0.west, dataset, xml] {\variable{NET.STA\duscore{}EVENTID\duscore{}TAG}};
+  \node (sm-st1) [below=of sm-st0.west, group, yshift=-5em] {\variable{NET.STA}};
+  \node (sm-st1-eq0) [below=of sm-st1.center, dataset, xml, subset-right] {\variable{NET.STA\duscore{}EVENTID\duscore{}TAG}};
+  \node (sm-st1-eq1) [below=of sm-st1-eq0.west, dataset, xml] {\variable{NET.STA\duscore{}EVENTID\duscore{}TAG}};
+  \draw[arrowto] (auxdata.south) |- (st-metrics.west);
+  \draw[arrowto] (st-metrics.south) |- (sm-st0.west);
+  \draw[arrowto] (sm-st0.south) |- (sm-st0-eq0.west);
+  \draw[arrowto] (sm-st0.south) |- (sm-st0-eq1.west);
+  \draw[arrowto] (st-metrics.south) |- (sm-st1.west);
+  \draw[arrowto] (sm-st1.south) |- (sm-st1-eq0.west);
+  \draw[arrowto] (sm-st1.south) |- (sm-st1-eq1.west);
+
+
+  % Legend
+  \matrix [draw=white,below left, row sep=0.5em] at ($(workspace.north east)+(36em,0)$) {
+    \node [group, legend] {Group}; \\[4pt]
+    \node [dataset, legend] {Dataset as int/float array}; \\
+    \node [dataset, xml, legend] {Dataset as XML}; \\
+  };
+
+\node [rectangle, draw=white, yshift=-1.0em, anchor=north] at (current bounding box.south) {\includegraphics[scale=0.5]{asdf_stationmetricsxml}};
+
+  
+\end{tikzpicture}
+
+\end{document}
+

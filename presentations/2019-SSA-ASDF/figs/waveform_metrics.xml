@@ -1,0 +1,20 @@
+<waveform_metrics>
+  <pga>
+    <rot_d50 units="m/s**2">0.45</rot_d50>
+    <maximum_component units="m/s**2">0.23</maximum_component>
+    <component name="east" units="m/s**2">0.23</component>
+    <component name="up" units="m/s**2">0.11</component>
+  </pga>
+  <sa percent_damping="5.0">
+    <rot_d50 units="g">
+      <value period="3.0">0.2</value>
+      <value period="1.0">0.6</value>
+      <value period="0.3">0.3</value>
+    </rot_d50>
+  </sa>
+  <pgv>
+    <maximum_component units="m/s">0.012</maximum_component>
+    <component name="east" units="m/s">0.012</component>
+    <component name="up" units="m/s">0.008</component>
+  </pgv>
+</waveform_metrics>
