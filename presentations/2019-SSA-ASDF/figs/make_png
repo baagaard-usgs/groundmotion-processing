@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if [ $# == 1 ]; then
   file_tex=$1
   file_pdf=`echo $file_tex | sed -e s/.tex/.pdf/g`

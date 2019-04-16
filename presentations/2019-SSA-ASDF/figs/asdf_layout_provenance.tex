@@ -1,0 +1,40 @@
+\documentclass[tikz, border=2pt]{standalone}
+\usepackage[none]{hyphenat}
+\usepackage{helvet}
+\renewcommand{\familydefault}{phv}
+
+\begin{document}
+\pagestyle{empty}
+
+\input{palettes/palette_general}
+\input{palettes/palette_usgs}
+
+\input{asdf_layout_base}
+
+\begin{tikzpicture}[diagram]
+
+  \node (workspace) [root] {Root (Workspace)};
+
+  % Provenance
+  \node (provenance) [below=of workspace.center, group, subset-right] {Provenance};
+  \node (prov0) [below=of provenance.center, dataset, xml, subset-right] {\variable{SEIS-PROV XML}};
+  \node (prov1) [below=of prov0.west, dataset, xml] {\variable{SEIS-PROV XML}};
+  \node (prov2) [below=of prov1.west, dataset, xml] {\variable{SEIS-PROV XML}};
+  \draw[arrowto] (workspace.south) |- (provenance.west);
+  \draw[arrowto] (provenance.south) |- (prov0.west);
+  \draw[arrowto] (provenance.south) |- (prov1.west);
+  \draw[arrowto] (provenance.south) |- (prov2.west);
+
+  % Legend
+  \matrix [draw=white,below left, row sep=0.5em] at  ($(current bounding box.north east)+(21em,0)$) {
+    \node [group, legend] {Group}; \\[4pt]
+    \node [dataset, legend] {Dataset as int/float array}; \\
+    \node [dataset, xml, legend] {Dataset as XML}; \\
+  };
+
+\node [rectangle, draw=white, below=of provenance, yshift=-6.0em, anchor=north] {\includegraphics[scale=0.5]{asdf_provxml}};
+  
+\end{tikzpicture}
+
+\end{document}
+
