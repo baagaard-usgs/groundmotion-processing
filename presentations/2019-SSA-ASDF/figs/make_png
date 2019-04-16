@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# == 1 ]; then
+  file_tex=$1
+  file_pdf=`echo $file_tex | sed -e s/.tex/.pdf/g`
+  file_png=`echo $file_tex | sed -e s/.tex/.png/g`
+  pdflatex $file_tex && convert -density 150 $file_pdf $file_png
+else
+  echo "usage: changesuffix OldRootName NewRootName"
+fi
+  
+exit 0

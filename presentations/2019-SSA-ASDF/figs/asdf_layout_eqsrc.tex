@@ -1,0 +1,38 @@
+\documentclass[tikz, border=2pt]{standalone}
+\usepackage[none]{hyphenat}
+\usepackage{helvet}
+\renewcommand{\familydefault}{phv}
+
+\begin{document}
+\pagestyle{empty}
+
+\input{palettes/palette_general}
+\input{palettes/palette_usgs}
+
+\input{asdf_layout_base}
+
+
+\begin{tikzpicture}[diagram]
+
+  \node (workspace) [root] {Root (Workspace)};
+
+  % Events
+  \node (events) [below=of workspace.center, dataset, xml, subset-right] {QuakeML};
+  \draw[arrowto] (workspace.south) |- (events.west);
+
+
+  % Legend
+  \matrix [draw=white,below left, row sep=0.5em] at ($(current bounding box.north east)+(21em,0)$) {
+    \node [group, legend] {Group}; \\[4pt]
+    \node [dataset, legend] {Dataset as int/float array}; \\
+    \node [dataset, xml, legend] {Dataset as XML}; \\
+  };
+
+\node [rectangle, draw=white, below=of events, yshift=-4.0em, anchor=north] {\includegraphics[scale=0.5]{eqsrc}};
+  
+
+\end{tikzpicture}
+
+
+\end{document}
+

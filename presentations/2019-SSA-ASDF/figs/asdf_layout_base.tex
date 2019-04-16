@@ -1,0 +1,49 @@
+\usetikzlibrary{positioning,arrows,shapes,calc,shadows.blur}
+
+\tikzstyle{diagram} = [node distance=2.5em]
+
+\tikzstyle{default} = [rectangle,
+  %minimum text width=10em,
+  minimum height=2.0em,
+  text centered,
+  line width=0pt,
+  blur shadow={shadow blur steps=4},
+]
+
+\tikzstyle{root} = [
+default,
+font={\bfseries},
+  top color=ltred!50!white,
+  bottom color=ltred,
+  anchor=west]
+
+\tikzstyle{group} = [
+  default,
+  rounded corners=0.5em,
+  top color=ltorange!50!white,
+  bottom color=ltorange,
+  anchor=west]
+
+\tikzstyle{dataset} = [
+  default,
+  top color=ltblue!50!white,
+  bottom color=ltblue,
+  anchor=west]
+  
+\tikzstyle{xml} = [
+  top color=ltgreen!50!white,
+  bottom color=ltgreen,
+  ]
+
+\tikzstyle{legend} = [
+  anchor=center]
+
+\tikzstyle{subset-right} = [
+  xshift=2em]
+
+\newcommand{\variable}[1]{{\itshape #1}}
+%\newcommand{\duscore}{\rule{8pt}{0.4pt}}
+\newcommand{\duscore}{\_\_}
+
+\tikzstyle{arrowto} = [line width=2pt, draw=white]
+
