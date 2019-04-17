@@ -63,6 +63,7 @@ def process_waveforms():
 
     # Process waveforms
     processed_streams = process_streams(raw_streams, event_dict, config=config)
+    processed_streams.describe()
     workspace.addStreams(event, processed_streams, label="processed")
 
     # Set waveform metrics in workspace
@@ -79,7 +80,7 @@ def query():
     print("Stream tags in workspace: {}".format(workspace.getStreamTags(EVENTID)))
     print("Processing labels in workspace: {}".format(workspace.getLabels()))
     
-    stream_nc_n016 = workspace.getStreams(EVENTID, labels="processed")
+    stream_nc_n016 = workspace.getStreams(EVENTID, labels=["processed"])
     stream_nc_n016.describe()
 
     metrics_nc_n016 = workspace.getStreamMetrics(EVENTID, station="NC.N016", label=['processed'])
@@ -87,8 +88,8 @@ def query():
 
 
 if __name__ == "__main__":
-    data_import()
-    process_waveforms()
+    #data_import()
+    #process_waveforms()
     query()
     
     
