@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <waveform_metrics>
   <pga>
     <rot_d50 units="m/s**2">0.45</rot_d50>

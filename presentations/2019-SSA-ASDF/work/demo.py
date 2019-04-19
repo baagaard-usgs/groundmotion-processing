@@ -88,8 +88,8 @@ def query():
 
 
 if __name__ == "__main__":
-    #data_import()
-    #process_waveforms()
+    data_import()
+    process_waveforms()
     query()
     
     
